@@ -10,18 +10,18 @@ const IconMail = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="non
 
 // --- MOCK DATA ---
 const PRODUCTS = [
-  { id: 1, sku: 'BP-001', name: 'Bunga Papan Wedding Klasik', price: 500000, disc: 5, city: 'Jakarta', cat: 'Papan', sold: 450, date: '2024-03-20', img: 'https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=600', desc: 'Rangkaian bunga papan pernikahan dengan desain klasik nan elegan.' },
-  { id: 2, sku: 'BP-002', name: 'Papan Duka Cita Eksklusif', price: 850000, disc: 15, city: 'Bandung', cat: 'Papan', sold: 45, date: '2024-03-21', img: 'https://images.unsplash.com/photo-1596073413908-4412c0117a7a?w=600', desc: 'Ungkapan belasungkawa terdalam dengan karangan bunga papan premium.' },
-  { id: 3, sku: 'HB-001', name: 'Mawar Merah Bouquet', price: 300000, disc: 25, city: 'Jakarta', cat: 'Bouquet', sold: 820, date: '2024-03-18', img: 'https://images.unsplash.com/photo-1561181286-d3fea73e413f?w=600', desc: 'Bukit mawar merah segar isi 20 tangkai dengan pembungkus premium.' },
-  { id: 4, sku: 'ST-001', name: 'Standing Flower Congratulation', price: 1200000, disc: 0, city: 'Surabaya', cat: 'Standing', sold: 120, date: '2024-03-19', img: 'https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=600', desc: 'Standing flower mewah untuk ucapan selamat atas peresmian kantor.' },
-  { id: 5, sku: 'BP-003', name: 'Papan Ucapan Selamat & Sukses', price: 600000, disc: 10, city: 'Medan', cat: 'Papan', sold: 388, date: '2024-03-15', img: 'https://images.unsplash.com/photo-1533616688419-b7a585564566?w=600', desc: 'Karangan bunga papan untuk apresiasi kesuksesan rekan bisnis.' },
+  { id: 1, sku: 'BP-001', name: 'Bunga Papan Wedding Klasik', price: 500000, disc: 5, city: 'Jakarta', cat: 'Papan', sold: 450, date: '2024-03-20', img: 'https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=600&h=600&fit=crop', desc: 'Rangkaian bunga papan pernikahan dengan desain klasik nan elegan.' },
+  { id: 2, sku: 'BP-002', name: 'Papan Duka Cita Eksklusif', price: 850000, disc: 15, city: 'Bandung', cat: 'Papan', sold: 45, date: '2024-03-21', img: 'https://images.unsplash.com/photo-1468327768560-75b778cbb551?w=600&h=600&fit=crop', desc: 'Ungkapan belasungkawa terdalam dengan karangan bunga papan premium.' },
+  { id: 3, sku: 'HB-001', name: 'Mawar Merah Bouquet', price: 300000, disc: 25, city: 'Jakarta', cat: 'Bouquet', sold: 820, date: '2024-03-18', img: 'https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=600&h=600&fit=crop', desc: 'Bukit mawar merah segar isi 20 tangkai dengan pembungkus premium.' },
+  { id: 4, sku: 'ST-001', name: 'Standing Flower Congratulation', price: 1200000, disc: 0, city: 'Surabaya', cat: 'Standing', sold: 120, date: '2024-03-19', img: 'https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=600&h=600&fit=crop', desc: 'Standing flower mewah untuk ucapan selamat atas peresmian kantor.' },
+  { id: 5, sku: 'BP-003', name: 'Papan Ucapan Selamat & Sukses', price: 600000, disc: 10, city: 'Medan', cat: 'Papan', sold: 388, date: '2024-03-15', img: 'https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=600&h=600&fit=crop', desc: 'Karangan bunga papan untuk apresiasi kesuksesan rekan bisnis.' },
 ];
 
 const GALLERY_IMAGES = [
-    'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400',
-    'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400',
-    'https://images.unsplash.com/photo-1525310238801-d03f99039ed4?w=400',
-    'https://images.unsplash.com/photo-1550000151-093c4176774e?w=400'
+    'https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=400&h=400&fit=crop',
+    'https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=400&h=400&fit=crop',
+    'https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=400&h=400&fit=crop',
+    'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400&h=400&fit=crop'
 ];
 
 const TESTIMONIALS = [
