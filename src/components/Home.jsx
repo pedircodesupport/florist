@@ -12,6 +12,8 @@ const Home = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [category, setCategory] = useState('Semua');
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(4);
+  const loaderRef = React.useRef(null);
 
   // Filter & Sort Logic
   const filtered = useMemo(() => {
@@ -32,6 +34,30 @@ const Home = () => {
       return new Date(b.date) - new Date(a.date);
     });
   }, [search, city, sort, category]);
+  
+  // Reset visibleCount when filters change
+  React.useEffect(() => {
+    setVisibleCount(4);
+  }, [search, city, category, sort]);
+
+  // Infinite Scroll Observer
+  React.useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && visibleCount < filtered.length) {
+            setVisibleCount(prev => prev + 4);
+        }
+    }, { threshold: 0.1 });
+
+    if (loaderRef.current) {
+        observer.observe(loaderRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [filtered.length, visibleCount]);
+
+  const visibleProducts = useMemo(() => {
+    return filtered.slice(0, visibleCount);
+  }, [filtered, visibleCount]);
 
   // Best Seller Logic
   const bestSellers = useMemo(() => {
@@ -145,7 +171,7 @@ const Home = () => {
 
       {/* Main Grid */}
       <div className="px-4 grid grid-cols-2 gap-4 py-4">
-        {filtered.map(p => {
+        {visibleProducts.map(p => {
           const finalPrice = p.price - (p.price * p.disc / 100);
           return (
             <div 
@@ -185,6 +211,27 @@ const Home = () => {
             </div>
           );
         })}
+      </div>
+
+      {/* Load More & Sentinel */}
+      <div className="px-4 mb-8">
+        {visibleCount < filtered.length ? (
+            <div className="flex flex-col items-center gap-4">
+                <button 
+                    onClick={() => setVisibleCount(prev => prev + 4)}
+                    className="px-8 py-3 bg-white border-2 border-pink-100 text-pink-500 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm hover:bg-pink-50 transition-all"
+                >
+                    Muat Lebih Banyak
+                </button>
+                <div ref={loaderRef} className="h-10 w-full flex items-center justify-center">
+                    <div className="w-1.5 h-1.5 bg-pink-500 rounded-full animate-bounce mx-0.5"></div>
+                    <div className="w-1.5 h-1.5 bg-pink-500 rounded-full animate-bounce mx-0.5 delay-100"></div>
+                    <div className="w-1.5 h-1.5 bg-pink-500 rounded-full animate-bounce mx-0.5 delay-200"></div>
+                </div>
+            </div>
+        ) : filtered.length > 0 && (
+            <p className="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest py-8">Semua produk telah ditampilkan</p>
+        )}
       </div>
 
       {/* Gallery */}
