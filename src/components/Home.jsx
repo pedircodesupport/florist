@@ -162,7 +162,12 @@ const Home = () => {
                     onClick={() => setSelectedProduct(p)}
                 >
                     <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-2">
-                        <img src={p.img} className="w-full h-full object-cover" alt="" />
+                        <img 
+                            src={p.img} 
+                            className="w-full h-full object-cover" 
+                            alt={p.name} 
+                            loading={bestSellers.indexOf(p) < 4 ? "eager" : "lazy"}
+                        />
                         <div className="absolute top-1 left-1 bg-white/90 backdrop-blur px-1.5 py-0.5 rounded-md text-[8px] font-black text-pink-500 shadow-sm">HOT</div>
                     </div>
                     <h3 className="text-[10px] font-black leading-tight line-clamp-1 mb-1">{p.name}</h3>
@@ -510,7 +515,7 @@ const Home = () => {
               return (
                 <div 
                   key={idx}
-                  className={`absolute inset-0 tinder-card rounded-[2.5rem] overflow-hidden shadow-2xl bg-white ${isActive ? 'z-10' : 'z-0 scale-95 opacity-50'} ${swipe.isMoving && isActive ? 'tinder-card-moving' : ''}`}
+                  className={`absolute inset-0 tinder-card rounded-[2.5rem] overflow-hidden shadow-2xl bg-white ${isActive ? 'z-10' : 'z-0 scale-95 opacity-50'} ${swipe.isMoving && isActive ? 'tinder-card-moving' : ''} ${swipe.direction === 'right' && !swipe.isMoving ? 'animate-swipe-right' : ''} ${swipe.direction === 'left' && !swipe.isMoving ? 'animate-swipe-left' : ''}`}
                   style={isActive ? {
                     transform: `translate(${swipe.x}px, ${swipe.y}px) rotate(${swipe.rotation}deg)`,
                   } : {}}
@@ -536,22 +541,22 @@ const Home = () => {
                     if (Math.abs(swipe.x) > 100) {
                         // Swipe triggered
                         setSwipe(prev => ({ ...prev, isMoving: false }));
-                        const nextIndex = swipe.x > 0 
-                            ? (activeGalleryIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length
-                            : (activeGalleryIndex + 1) % GALLERY_IMAGES.length;
+                        const nextIndex = swipe.direction === 'left' 
+                            ? (activeGalleryIndex + 1) % GALLERY_IMAGES.length
+                            : (activeGalleryIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
                         
-                        // Small delay for animation
+                        // Wait for animation to finish (matching transition-duration in index.css)
                         setTimeout(() => {
                             setActiveGalleryIndex(nextIndex);
                             setSwipe({ x: 0, y: 0, rotation: 0, isMoving: false, direction: null });
-                        }, 100);
+                        }, 300);
                     } else {
                         // Reset position
                         setSwipe({ x: 0, y: 0, rotation: 0, isMoving: false, direction: null });
                     }
                   }}
                 >
-                  <img src={img} className="w-full h-full object-cover pointer-events-none" alt="" />
+                  <img src={img} className="w-full h-full object-cover pointer-events-none" alt={`Hasil Pengiriman ${idx + 1}`} />
                   
                   {/* Swipe Overlays */}
                   <div className={`absolute top-10 left-10 border-4 border-green-500 text-green-500 font-black px-4 py-2 rounded-xl text-2xl uppercase tracking-widest -rotate-12 transition-opacity ${swipe.direction === 'right' ? 'opacity-100' : 'opacity-0'}`}>
@@ -563,7 +568,7 @@ const Home = () => {
 
                   <div className="absolute bottom-10 left-0 right-0 px-8 text-center bg-gradient-to-t from-black/60 to-transparent pt-20 pb-6">
                     <p className="text-white font-black text-sm uppercase tracking-widest shadow-sm">Foto Real Pengiriman</p>
-                    <p className="text-white/70 text-[10px] font-bold mt-1">Image {idx + 1} of {GALLERY_IMAGES.length}</p>
+                    <p className="text-white/70 text-[10px] font-bold mt-1">Gambar {idx + 1} dari {GALLERY_IMAGES.length}</p>
                   </div>
                 </div>
               );
