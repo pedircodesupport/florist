@@ -58,6 +58,50 @@ body {
   padding: 0;
 }
 
+
 * {
   box-sizing: border-box;
+}
+
+/* --- TINDER SWIPE ANIMATIONS --- */
+.tinder-card {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+  transform-origin: center bottom;
+  touch-action: none;
+}
+
+.tinder-card-moving {
+  transition: none !important;
+}
+
+@keyframes swipe-right {
+  to {
+    transform: translate(150%, -20%) rotate(30deg);
+    opacity: 0;
+  }
+}
+
+@keyframes swipe-left {
+  to {
+    transform: translate(-150%, -20%) rotate(-30deg);
+    opacity: 0;
+  }
+}
+
+.animate-swipe-right {
+  animation: swipe-right 0.5s forwards ease-out;
+}
+
+.animate-swipe-left {
+  animation: swipe-left 0.5s forwards ease-out;
+}
+
+.tinder-overlay {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.tinder-overlay-visible {
+  opacity: 1;
 }

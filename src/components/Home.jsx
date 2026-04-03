@@ -15,6 +15,12 @@ const Home = () => {
   const [visibleCount, setVisibleCount] = useState(4);
   const loaderRef = React.useRef(null);
 
+  // Gallery Swipe State
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
+  const [swipe, setSwipe] = useState({ x: 0, y: 0, rotation: 0, isMoving: false, direction: null });
+  const touchStart = React.useRef({ x: 0, y: 0 });
+
   // Filter & Sort Logic
   const filtered = useMemo(() => {
     let res = PRODUCTS.filter(p => {
@@ -245,7 +251,14 @@ const Home = () => {
         </div>
         <div className="grid grid-cols-2 gap-3 px-2">
             {GALLERY_IMAGES.map((img, idx) => (
-                <div key={idx} className="aspect-square rounded-[1.5rem] overflow-hidden border-2 border-slate-50 shadow-inner">
+                <div 
+                  key={idx} 
+                  className="aspect-square rounded-[1.5rem] overflow-hidden border-2 border-slate-50 shadow-inner cursor-pointer active:scale-95 transition-all"
+                  onClick={() => {
+                    setActiveGalleryIndex(idx);
+                    setIsGalleryOpen(true);
+                  }}
+                >
                     <img src={img} className="w-full h-full object-cover" alt="Hasil Pengiriman" />
                 </div>
             ))}
@@ -458,6 +471,108 @@ const Home = () => {
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Gallery Lightbox (Tinder Swipe) */}
+      {isGalleryOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/95 backdrop-blur-xl animate-in fade-in">
+          <button 
+            onClick={() => setIsGalleryOpen(false)}
+            className="absolute top-8 right-8 z-[110] p-3 bg-white/10 hover:bg-white/20 rounded-full text-white border border-white/20 transition-all"
+          >
+            <IconClose />
+          </button>
+
+          <div className="relative w-full max-w-sm aspect-[3/4]">
+            {GALLERY_IMAGES.map((img, idx) => {
+              const isActive = idx === activeGalleryIndex;
+              if (!isActive && idx !== (activeGalleryIndex + 1) % GALLERY_IMAGES.length) return null;
+
+              return (
+                <div 
+                  key={idx}
+                  className={`absolute inset-0 tinder-card rounded-[2.5rem] overflow-hidden shadow-2xl bg-white ${isActive ? 'z-10' : 'z-0 scale-95 opacity-50'} ${swipe.isMoving && isActive ? 'tinder-card-moving' : ''}`}
+                  style={isActive ? {
+                    transform: `translate(${swipe.x}px, ${swipe.y}px) rotate(${swipe.rotation}deg)`,
+                  } : {}}
+                  onTouchStart={(e) => {
+                    if (!isActive) return;
+                    touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                    setSwipe(prev => ({ ...prev, isMoving: true }));
+                  }}
+                  onTouchMove={(e) => {
+                    if (!isActive) return;
+                    const dx = e.touches[0].clientX - touchStart.current.x;
+                    const dy = e.touches[0].clientY - touchStart.current.y;
+                    setSwipe({
+                        x: dx,
+                        y: dy,
+                        rotation: dx * 0.1,
+                        isMoving: true,
+                        direction: dx > 50 ? 'right' : dx < -50 ? 'left' : null
+                    });
+                  }}
+                  onTouchEnd={() => {
+                    if (!isActive) return;
+                    if (Math.abs(swipe.x) > 100) {
+                        // Swipe triggered
+                        setSwipe(prev => ({ ...prev, isMoving: false }));
+                        const nextIndex = swipe.x > 0 
+                            ? (activeGalleryIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length
+                            : (activeGalleryIndex + 1) % GALLERY_IMAGES.length;
+                        
+                        // Small delay for animation
+                        setTimeout(() => {
+                            setActiveGalleryIndex(nextIndex);
+                            setSwipe({ x: 0, y: 0, rotation: 0, isMoving: false, direction: null });
+                        }, 100);
+                    } else {
+                        // Reset position
+                        setSwipe({ x: 0, y: 0, rotation: 0, isMoving: false, direction: null });
+                    }
+                  }}
+                >
+                  <img src={img} className="w-full h-full object-cover pointer-events-none" alt="" />
+                  
+                  {/* Swipe Overlays */}
+                  <div className={`absolute top-10 left-10 border-4 border-green-500 text-green-500 font-black px-4 py-2 rounded-xl text-2xl uppercase tracking-widest -rotate-12 transition-opacity ${swipe.direction === 'right' ? 'opacity-100' : 'opacity-0'}`}>
+                    LIKE
+                  </div>
+                  <div className={`absolute top-10 right-10 border-4 border-red-500 text-red-500 font-black px-4 py-2 rounded-xl text-2xl uppercase tracking-widest rotate-12 transition-opacity ${swipe.direction === 'left' ? 'opacity-100' : 'opacity-0'}`}>
+                    NOPE
+                  </div>
+
+                  <div className="absolute bottom-10 left-0 right-0 px-8 text-center bg-gradient-to-t from-black/60 to-transparent pt-20 pb-6">
+                    <p className="text-white font-black text-sm uppercase tracking-widest shadow-sm">Foto Real Pengiriman</p>
+                    <p className="text-white/70 text-[10px] font-bold mt-1">Image {idx + 1} of {GALLERY_IMAGES.length}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop Controls */}
+          <div className="absolute bottom-12 left-0 right-0 flex justify-center gap-6 z-[110]">
+             <button 
+                onClick={() => setActiveGalleryIndex(prev => (prev - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length)}
+                className="w-12 h-12 bg-white/10 hover:bg-red-500/20 text-white rounded-full flex items-center justify-center border border-white/20 transition-all group"
+             >
+                <div className="group-hover:scale-110 transition-transform"><IconArrowLeft /></div>
+             </button>
+             <button 
+                onClick={() => setIsGalleryOpen(false)}
+                className="w-12 h-12 bg-white text-slate-900 rounded-full flex items-center justify-center shadow-xl font-black text-sm"
+             >
+                OK
+             </button>
+             <button 
+                onClick={() => setActiveGalleryIndex(prev => (prev + 1) % GALLERY_IMAGES.length)}
+                className="w-12 h-12 bg-white/10 hover:bg-green-500/20 text-white rounded-full flex items-center justify-center border border-white/20 transition-all group rotate-180"
+             >
+                <div className="group-hover:scale-110 transition-transform"><IconArrowLeft /></div>
+             </button>
           </div>
         </div>
       )}
