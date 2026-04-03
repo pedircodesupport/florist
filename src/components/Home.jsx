@@ -164,9 +164,11 @@ const Home = () => {
                     <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-2">
                         <img 
                             src={p.img} 
-                            className="w-full h-full object-cover" 
+                            className="w-full h-full object-cover img-skeleton" 
                             alt={p.name} 
                             loading={bestSellers.indexOf(p) < 4 ? "eager" : "lazy"}
+                            onLoad={(e) => e.target.classList.remove('img-skeleton')}
+                            onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; e.target.parentElement.style.background = 'linear-gradient(135deg, #fce7f3, #fda4af)'; }}
                         />
                         <div className="absolute top-1 left-1 bg-white/90 backdrop-blur px-1.5 py-0.5 rounded-md text-[8px] font-black text-pink-500 shadow-sm">HOT</div>
                     </div>
@@ -206,8 +208,10 @@ const Home = () => {
                 <img 
                   src={p.img} 
                   alt={p.name} 
-                  className="w-full h-full object-cover" 
+                  className="w-full h-full object-cover img-skeleton" 
                   loading={idx < 4 ? "eager" : "lazy"} 
+                  onLoad={(e) => e.target.classList.remove('img-skeleton')}
+                  onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; e.target.parentElement.style.background = 'linear-gradient(135deg, #fce7f3, #fda4af)'; }}
                 />
                 {p.disc > 0 && <span className="absolute top-3 left-3 bg-pink-500 text-white text-[8px] font-black px-2 py-1 rounded-lg shadow-lg">-{p.disc}%</span>}
                 <span className="absolute bottom-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-lg text-[8px] font-black text-slate-900 shadow-sm">{p.city}</span>
@@ -281,7 +285,7 @@ const Home = () => {
                     setIsGalleryOpen(true);
                   }}
                 >
-                    <img src={img} className="w-full h-full object-cover" alt="Hasil Pengiriman" />
+                    <img src={img} className="w-full h-full object-cover img-skeleton" alt={`Hasil Pengiriman ${idx + 1}`} loading="lazy" onLoad={(e) => e.target.classList.remove('img-skeleton')} onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; e.target.parentElement.style.background = 'linear-gradient(135deg, #fce7f3, #fda4af)'; }} />
                 </div>
             ))}
         </div>
@@ -429,7 +433,7 @@ const Home = () => {
             
             <div className="overflow-y-auto no-scrollbar flex-grow pb-12">
               <div className="relative aspect-square">
-                <img src={selectedProduct.img} alt={selectedProduct.name} className="w-full h-full object-cover" />
+                <img src={selectedProduct.img} alt={selectedProduct.name} className="w-full h-full object-cover img-skeleton" onLoad={(e) => e.target.classList.remove('img-skeleton')} onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; e.target.parentElement.style.background = 'linear-gradient(135deg, #fce7f3, #fda4af)'; }} />
                 <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent"></div>
               </div>
               
@@ -556,7 +560,7 @@ const Home = () => {
                     }
                   }}
                 >
-                  <img src={img} className="w-full h-full object-cover pointer-events-none" alt={`Hasil Pengiriman ${idx + 1}`} />
+                  <img src={img} className="w-full h-full object-cover pointer-events-none img-skeleton" alt={`Hasil Pengiriman ${idx + 1}`} onLoad={(e) => e.target.classList.remove('img-skeleton')} onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; e.target.parentElement.style.background = 'linear-gradient(135deg, #fce7f3, #fda4af)'; }} />
                   
                   {/* Swipe Overlays */}
                   <div className={`absolute top-10 left-10 border-4 border-green-500 text-green-500 font-black px-4 py-2 rounded-xl text-2xl uppercase tracking-widest -rotate-12 transition-opacity ${swipe.direction === 'right' ? 'opacity-100' : 'opacity-0'}`}>
