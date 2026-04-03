@@ -26,7 +26,7 @@ const BestSellerPage = () => {
 
             {/* Grid */}
             <div className="px-4 grid grid-cols-2 gap-4 py-6">
-                {bestSellers.map(p => {
+                {bestSellers.map((p, idx) => {
                     const finalPrice = p.price - (p.price * p.disc / 100);
                     return (
                         <div 
@@ -35,7 +35,12 @@ const BestSellerPage = () => {
                             onClick={() => setSelectedProduct(p)}
                         >
                             <div className="relative aspect-[4/5]">
-                                <img src={p.img} alt={p.name} className="w-full h-full object-cover" loading="lazy" />
+                                <img 
+                                    src={p.img} 
+                                    alt={p.name} 
+                                    className="w-full h-full object-cover" 
+                                    loading={idx < 4 ? "eager" : "lazy"} 
+                                />
                                 {p.disc > 0 && <span className="absolute top-3 left-3 bg-pink-500 text-white text-[8px] font-black px-2 py-1 rounded-lg shadow-lg">-{p.disc}%</span>}
                                 <span className="absolute bottom-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-lg text-[8px] font-black text-slate-900 shadow-sm">{p.city}</span>
                             </div>
