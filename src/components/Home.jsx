@@ -1,11 +1,12 @@
 import React, { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
     IconSearch, IconFilter, IconWA, IconMail, IconStar, IconClose, IconArrowLeft, 
     PRODUCTS, GALLERY_IMAGES, TESTIMONIALS, sendWA 
 } from '../data';
 
 const Home = () => {
+  const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [city, setCity] = useState('Semua');
   const [sort, setSort] = useState('newest');
@@ -605,17 +606,26 @@ const Home = () => {
 
       {/* Navigasi Bawah */}
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t flex justify-around items-center h-20 px-8 sm:hidden z-50 shadow-[0_-5px_20px_rgba(0,0,0,0.05)]">
-        <button className="text-pink-600 flex flex-col items-center gap-1.5 transition-all">
+        <button 
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="text-pink-600 flex flex-col items-center gap-1.5 transition-all"
+        >
           <div className="w-1.5 h-1.5 bg-pink-500 rounded-full"></div>
-          <span className="text-[10px] font-black uppercase tracking-tighter">Katalog</span>
+          <span className="text-[10px] font-black uppercase tracking-tighter">Home</span>
         </button>
-        <button className="text-slate-300 flex flex-col items-center gap-1.5 opacity-60">
-          <div className="w-5 h-5 bg-slate-100 rounded-md"></div>
-          <span className="text-[10px] font-black uppercase tracking-tighter">Lacak</span>
+        <button 
+          onClick={() => navigate('/best-sellers')}
+          className="text-slate-400 flex flex-col items-center gap-1.5 opacity-80"
+        >
+          <div className="w-5 h-5 bg-slate-50 rounded-md flex items-center justify-center text-slate-400"><IconStar /></div>
+          <span className="text-[10px] font-black uppercase tracking-tighter">Best Seller</span>
         </button>
-        <button className="text-slate-300 flex flex-col items-center gap-1.5 opacity-60">
-          <div className="w-5 h-5 bg-slate-100 rounded-md"></div>
-          <span className="text-[10px] font-black uppercase tracking-tighter">Kontak</span>
+        <button 
+          onClick={() => window.open('https://wa.me/628123456789', '_blank')}
+          className="text-slate-400 flex flex-col items-center gap-1.5 opacity-80"
+        >
+          <div className="w-5 h-5 bg-slate-50 rounded-md flex items-center justify-center text-slate-400"><IconWA /></div>
+          <span className="text-[10px] font-black uppercase tracking-tighter">Whatsapp</span>
         </button>
       </div>
     </div>
