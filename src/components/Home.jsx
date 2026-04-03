@@ -137,7 +137,7 @@ const Home = () => {
       <div className="px-4 pt-6">
         <div className="relative w-full aspect-[21/9] bg-gradient-to-br from-pink-500 to-rose-600 rounded-[2rem] overflow-hidden shadow-xl shadow-pink-100 p-6 flex flex-col justify-center border-4 border-white">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-10 -mt-10 blur-2xl"></div>
-            <span className="text-[10px] font-black text-pink-100 tracking-widest uppercase mb-1 drop-shadow-sm">Promo Ramadan</span>
+            <span className="text-[10px] font-black text-pink-100 tracking-widest uppercase mb-1 drop-shadow-sm">Promo Lebaran</span>
             <h2 className="text-xl font-black text-white leading-none mb-2 drop-shadow-md">GRATIS ONGKIR <br/>SE-INDONESIA</h2>
             <p className="text-[10px] text-pink-50 font-bold opacity-90 max-w-[150px]">Pesan sekarang, sampai dalam 3 jam ke lokasi.</p>
             <div className="mt-3">
