@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
-    IconSearch, IconFilter, IconWA, IconMail, IconStar, IconClose, IconArrowLeft, 
+    IconSearch, IconFilter, IconWA, IconMail, IconStar, IconClose, IconArrowLeft, IconHome, 
     PRODUCTS, GALLERY_IMAGES, TESTIMONIALS, sendWA 
 } from '../data';
 
@@ -613,21 +613,21 @@ const Home = () => {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="text-pink-600 flex flex-col items-center gap-1.5 transition-all"
         >
-          <div className="w-1.5 h-1.5 bg-pink-500 rounded-full"></div>
+          <div className="w-8 h-8 flex items-center justify-center"><IconHome /></div>
           <span className="text-[10px] font-black uppercase tracking-tighter">Home</span>
         </button>
         <button 
           onClick={() => navigate('/best-sellers')}
           className="text-slate-400 flex flex-col items-center gap-1.5 opacity-80"
         >
-          <div className="w-5 h-5 bg-slate-50 rounded-md flex items-center justify-center text-slate-400"><IconStar /></div>
+          <div className="w-8 h-8 flex items-center justify-center"><IconStar /></div>
           <span className="text-[10px] font-black uppercase tracking-tighter">Best Seller</span>
         </button>
         <button 
           onClick={() => window.open('https://wa.me/628123456789', '_blank')}
-          className="text-slate-400 flex flex-col items-center gap-1.5 opacity-80"
+          className="text-[#25D366] flex flex-col items-center gap-1.5 transition-all"
         >
-          <div className="w-5 h-5 bg-slate-50 rounded-md flex items-center justify-center text-slate-400"><IconWA /></div>
+          <div className="w-8 h-8 flex items-center justify-center"><IconWA /></div>
           <span className="text-[10px] font-black uppercase tracking-tighter">Whatsapp</span>
         </button>
       </div>
