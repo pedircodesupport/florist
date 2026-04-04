@@ -15,6 +15,9 @@ const Home = () => {
   const [visibleCount, setVisibleCount] = useState(4);
   const [citySearch, setCitySearch] = useState('');
 
+  // Diagnostic Log
+  console.log('Home Render:', { hasSiteConfig: !!SITE_CONFIG, productCount: PRODUCTS?.length });
+
   // SEO & Schema.org Logic
   React.useEffect(() => {
     document.title = SITE_CONFIG?.title || 'Florist.AI';
@@ -125,7 +128,7 @@ const Home = () => {
 
   // Best Seller Logic
   const bestSellers = useMemo(() => {
-    return PRODUCTS.filter(p => p.sold > 100).sort((a, b) => b.sold - a.sold);
+    return (PRODUCTS || []).filter(p => (p.sold || 0) > 100).sort((a, b) => (b.sold || 0) - (a.sold || 0));
   }, []);
 
   return (
