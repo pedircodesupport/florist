@@ -17,7 +17,7 @@ const Home = () => {
 
   // SEO & Schema.org Logic
   React.useEffect(() => {
-    document.title = SITE_CONFIG.title;
+    document.title = SITE_CONFIG?.title || 'Florist.AI';
     
     // Inject JSON-LD
     const schemaData = {
@@ -457,8 +457,8 @@ const Home = () => {
                     onChange={(e) => setCitySearch(e.target.value)}
                   />
                   <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar py-1">
-                    {['Semua', ...SITE_CONFIG.locations]
-                      .filter(c => c.toLowerCase().includes(citySearch.toLowerCase()))
+                    {['Semua', ...(SITE_CONFIG?.locations || [])]
+                      .filter(c => c.toLowerCase().includes(citySearch?.toLowerCase() || ''))
                       .map(c => (
                       <button 
                         key={c}
