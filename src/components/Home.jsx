@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
     IconSearch, IconFilter, IconWA, IconMail, IconStar, IconClose, IconArrowLeft, IconHome, 
-    PRODUCTS, GALLERY_IMAGES, TESTIMONIALS, sendWA, SITE_CONFIG, PAYMENT_METHODS 
+    PRODUCTS, GALLERY_IMAGES, TESTIMONIALS, sendWA, SITE_CONFIG 
 } from '../data';
 
 const Home = () => {
@@ -709,38 +709,7 @@ const Home = () => {
         </button>
       </div>
 
-      {/* SEO Footer (Localized Service Areas) */}
-      {/* Metode Pembayaran Section */}
-      <section className="px-6 py-12 bg-white border-t border-slate-100">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-3 mb-8">
-            <span className="w-1.5 h-6 bg-pink-500 rounded-full"></span>
-            <h2 className="text-lg font-black text-slate-800 tracking-tight uppercase">Metode Pembayaran</h2>
-          </div>
-          <div className="grid grid-cols-4 sm:grid-cols-8 gap-4 items-center">
-            {PAYMENT_METHODS.map((method) => (
-              <div key={method.name} className="flex flex-col items-center gap-2 group">
-                <div className="w-full aspect-video bg-slate-50 rounded-xl p-3 flex items-center justify-center border border-slate-100 group-hover:border-pink-200 transition-colors shadow-sm">
-                  <img 
-                    src={method.icon} 
-                    alt={method.name} 
-                    className="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                  />
-                </div>
-                <span className="text-[9px] font-black text-slate-400 group-hover:text-pink-500 transition-colors uppercase tracking-widest">{method.name}</span>
-              </div>
-            ))}
-          </div>
-          <div className="mt-8 p-4 bg-pink-50/50 rounded-2xl border border-pink-100 flex items-center gap-4">
-            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm text-pink-500">
-              <IconStar />
-            </div>
-            <p className="text-[10px] font-bold text-pink-700 leading-relaxed">
-              Pembayaran aman & otomatis via QRIS, Virtual Account, dan E-Wallet. Pesanan langsung diproses setelah konfirmasi.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Light SEO Footer (Localized Service Areas) */}
 
       <footer className="mt-12 mb-24 px-6 py-8 border-t border-slate-100 bg-white opacity-80">
         <div className="max-w-7xl mx-auto">
