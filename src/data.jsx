@@ -16,8 +16,18 @@ export const SITE_CONFIG = {
     title: "Florist.AI: Toko Bunga Online 24 Jam - Kirim Bunga Papan & Bouquet",
     description: "Toko bunga online premium dengan pengiriman cepat ke seluruh Indonesia. Spesialis bunga papan, hand bouquet, dan standing flower untuk segala acara.",
     keywords: "toko bunga online, kirim bunga jakarta, bunga papan ucapan, hand bouquet murah, florist indonesia, bunga mawar.",
-    url: "https://florist-ai.vercel.app", // Alamat demo
-    locations: ["Jakarta", "Bekasi", "Tangerang", "Depok", "Bogor", "Surabaya", "Bandung", "Medan", "Makassar"]
+    url: "https://florist-ai.vercel.app", 
+    locations: [
+      "Jakarta", "Bekasi", "Tangerang", "Depok", "Bogor", "Surabaya", "Bandung", "Medan", "Makassar", 
+      "Semarang", "Palembang", "Batam", "Pekanbaru", "Bandar Lampung", "Padang", "Denpasar", "Bali", "Aceh",
+      "Malang", "Samarinda", "Banjarmasin", "Tasikmalaya", "Serang", "Pontianak", "Cimahi", "Balikpapan",
+      "Jambi", "Surakarta", "Solo", "Manado", "Mataram", "Lombok", "Yogyakarta", "Cilegon", "Kupang",
+      "Palu", "Ambon", "Tarakan", "Cirebon", "Sukabumi", "Pekalongan", "Kediri", "Binjai", "Jayapura",
+      "Banda Aceh", "Pematangsiantar", "Padangsidimpuan", "Tebing Tinggi", "Lubuklinggau", "Banda Lampung",
+      "Pangkal Pinang", "Bangka Belitung", "Tanjung Pinang", "Dumai", "Bukittinggi", "Probolinggo",
+      "Pasuruan", "Mojokerto", "Madiun", "Blitar", "Banjar", "Palangkaraya", "Banjarbaru", "Singkawang",
+      "Bontang", "Bitung", "Tomohon", "Ternate", "Tidore", "Sorong", "Manokwari"
+    ]
 };
 
 // --- MOCK DATA ---

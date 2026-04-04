@@ -686,7 +686,7 @@ const Home = () => {
               Area Pengiriman Kami
             </h2>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 max-h-40 overflow-y-auto pr-2 custom-scrollbar">
               {SITE_CONFIG.locations.map(loc => (
                 <span key={loc} className="text-[10px] font-bold text-slate-400 bg-slate-50 px-3 py-1 rounded-full text-nowrap">
                   Toko Bunga {loc}
