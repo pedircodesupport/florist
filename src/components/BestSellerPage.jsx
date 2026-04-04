@@ -48,7 +48,7 @@ const BestSellerPage = () => {
                             </div>
                             <div className="p-4 flex-grow flex flex-col">
                                 <div className="flex items-center gap-1 mb-1.5 opacity-60">
-                                    <IconStar />
+                                    <div className="w-2.5 h-2.5"><IconStar /></div>
                                     <span className="text-[9px] font-bold text-slate-700">4.9</span>
                                     <span className="text-[8px] text-slate-400">({p.sold} terjual)</span>
                                 </div>
@@ -97,7 +97,7 @@ const BestSellerPage = () => {
                         <div className="flex justify-between items-center mb-4">
                         <span className="bg-pink-500 text-white text-[9px] font-black px-3 py-1.5 rounded-full tracking-widest uppercase shadow-lg shadow-pink-100">{selectedProduct.cat}</span>
                         <div className="flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-full">
-                            <IconStar />
+                            <div className="w-3 h-3"><IconStar /></div>
                             <span className="text-xs font-black text-slate-800">4.9</span>
                             <span className="text-[10px] text-slate-400 font-bold">({selectedProduct.sold} terjual)</span>
                         </div>
