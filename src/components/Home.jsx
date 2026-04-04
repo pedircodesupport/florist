@@ -102,7 +102,10 @@ const Home = () => {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <button className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-500 hover:text-pink-500 transition-colors">
+              <button 
+                onClick={() => window.open('https://wa.me/628123456789', '_blank')}
+                className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-[#25D366] hover:bg-[#25D366]/10 transition-all shadow-sm"
+              >
                 <IconWA />
               </button>
               <button className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-500 hover:text-pink-500 transition-colors">
