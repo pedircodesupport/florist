@@ -446,7 +446,7 @@ const Home = () => {
               <div>
                 <label className="text-[10px] font-black text-slate-400 uppercase mb-4 block tracking-widest">Wilayah Operasional</label>
                 <div className="flex flex-wrap gap-2">
-                  {['Semua', 'Jakarta', 'Bandung', 'Surabaya', 'Medan'].map(c => (
+                  {['Semua', ...SITE_CONFIG.locations].map(c => (
                     <button 
                       key={c}
                       onClick={() => setCity(c)}
