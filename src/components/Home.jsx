@@ -52,7 +52,11 @@ const Home = () => {
     script.innerHTML = JSON.stringify(schemaData);
     document.head.appendChild(script);
 
-    return () => document.head.removeChild(script);
+    return () => {
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
+    };
   }, []);
   const loaderRef = React.useRef(null);
 
@@ -64,8 +68,9 @@ const Home = () => {
 
   // Filter & Sort Logic
   const filtered = useMemo(() => {
-    let res = PRODUCTS.filter(p => {
-      const matchSearch = p.name.toLowerCase().includes(search.toLowerCase()) || p.sku.toLowerCase().includes(search.toLowerCase());
+    let res = (PRODUCTS || []).filter(p => {
+      const matchSearch = (p.name?.toLowerCase() || '').includes(search.toLowerCase()) || 
+                          (p.sku?.toLowerCase() || '').includes(search.toLowerCase());
       const matchCity = city === 'Semua' || p.city === city;
       const matchCat = category === 'Semua' || p.cat === category;
       return matchSearch && matchCity && matchCat;
