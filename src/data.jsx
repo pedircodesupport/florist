@@ -60,3 +60,15 @@ export const sendWA = (p) => {
     const msg = `Halo, saya mau pesan:\nID: ${p.sku}\nProduk: ${p.name}\nHarga: Rp ${finalPrice.toLocaleString('id-ID')}\nArea: ${p.city}`;
     window.open(`https://api.whatsapp.com/send?phone=628123456789&text=${encodeURIComponent(msg)}`, '_blank');
 };
+
+// --- PAYMENT METHODS (Midtrans Supported) ---
+export const PAYMENT_METHODS = [
+  { name: 'QRIS', icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_QRIS.svg' },
+  { name: 'BCA', icon: 'https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg' },
+  { name: 'Mandiri', icon: 'https://upload.wikimedia.org/wikipedia/id/f/fa/Bank_Mandiri_logo.svg' },
+  { name: 'BNI', icon: 'https://upload.wikimedia.org/wikipedia/id/5/55/BNI_logo.svg' },
+  { name: 'BRI', icon: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/BRI_Logo.svg' },
+  { name: 'GoPay', icon: 'https://upload.wikimedia.org/wikipedia/commons/8/86/Gopay_logo.svg' },
+  { name: 'OVO', icon: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo_ovo_purple.svg' },
+  { name: 'ShopeePay', icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_ShopeePay.svg' }
+];
