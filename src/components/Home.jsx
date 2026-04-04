@@ -426,7 +426,9 @@ const Home = () => {
             <div className="pt-8 border-t border-slate-800">
                 <h3 className="text-[9px] font-black uppercase tracking-widest mb-4 text-slate-500">Metode Pembayaran Aman</h3>
                 <div className="flex flex-wrap gap-3 opacity-40 grayscale hover:grayscale-0 transition-all">
-                    <div className="h-7 w-14 bg-white rounded flex items-center justify-center text-[8px] font-black text-slate-900">MIDTRANS</div>
+                    <div className="h-7 w-12 bg-white rounded flex items-center justify-center text-[7px] font-black text-blue-900">MANDIRI</div>
+                    <div className="h-7 w-12 bg-white rounded flex items-center justify-center text-[7px] font-black text-orange-600">BNI</div>
+                    <div className="h-7 w-12 bg-white rounded flex items-center justify-center text-[7px] font-black text-blue-700">BRI</div>
                     <div className="h-7 w-12 bg-white rounded flex items-center justify-center text-[8px] font-black text-blue-800 italic">QRIS</div>
                     <div className="h-7 w-12 bg-white rounded flex items-center justify-center text-[8px] font-black text-blue-900 font-serif">BCA</div>
                     <div className="h-7 w-12 bg-white rounded flex items-center justify-center text-[8px] font-black text-green-700">GOPAY</div>
