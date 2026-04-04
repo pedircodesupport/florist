@@ -12,6 +12,7 @@ const Home = () => {
   const [sort, setSort] = useState('newest');
   const [showFilter, setShowFilter] = useState(false);
   const [category, setCategory] = useState('Semua');
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [visibleCount, setVisibleCount] = useState(4);
   const [citySearch, setCitySearch] = useState('');
 
