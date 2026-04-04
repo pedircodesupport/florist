@@ -127,6 +127,14 @@ const Home = () => {
     return filtered.slice(0, visibleCount);
   }, [filtered, visibleCount]);
 
+  // Helper for better UI presentation of BPS data
+  const toTitleCase = (str) => {
+    if (!str) return '';
+    return str.toLowerCase().split(' ').map(word => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join(' ');
+  };
+
   // Best Seller Logic
   const bestSellers = useMemo(() => {
     return (PRODUCTS || []).filter(p => (p.sold || 0) > 100).sort((a, b) => (b.sold || 0) - (a.sold || 0));
@@ -474,7 +482,7 @@ const Home = () => {
                         onClick={() => setCity(c)}
                         className={`px-6 py-2.5 rounded-xl text-[10px] font-black border transition-all ${city === c ? 'bg-slate-900 text-white border-slate-900 shadow-xl shadow-slate-200' : 'bg-white border-slate-100 text-slate-400'}`}
                       >
-                        {c}
+                        {toTitleCase(c)}
                       </button>
                     ))}
                   </div>
@@ -712,7 +720,7 @@ const Home = () => {
           <div className="flex flex-wrap gap-2 max-h-40 overflow-y-auto pr-2 custom-scrollbar">
               {SITE_CONFIG.locations.map(loc => (
                 <span key={loc} className="text-[10px] font-bold text-slate-400 bg-slate-50 px-3 py-1 rounded-full text-nowrap">
-                  Toko Bunga {loc}
+                  Toko Bunga {toTitleCase(loc)}
                 </span>
               ))}
           </div>
