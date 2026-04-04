@@ -12,8 +12,8 @@ const Home = () => {
   const [sort, setSort] = useState('newest');
   const [showFilter, setShowFilter] = useState(false);
   const [category, setCategory] = useState('Semua');
-  const [selectedProduct, setSelectedProduct] = useState(null);
   const [visibleCount, setVisibleCount] = useState(4);
+  const [citySearch, setCitySearch] = useState('');
 
   // SEO & Schema.org Logic
   React.useEffect(() => {
@@ -445,16 +445,30 @@ const Home = () => {
 
               <div>
                 <label className="text-[10px] font-black text-slate-400 uppercase mb-4 block tracking-widest">Wilayah Operasional</label>
-                <div className="flex flex-wrap gap-2">
-                  {['Semua', ...SITE_CONFIG.locations].map(c => (
-                    <button 
-                      key={c}
-                      onClick={() => setCity(c)}
-                      className={`px-6 py-2.5 rounded-xl text-xs font-black border transition-all ${city === c ? 'bg-slate-900 text-white border-slate-900 shadow-xl shadow-slate-200' : 'bg-white border-slate-100 text-slate-400'}`}
-                    >
-                      {c}
-                    </button>
-                  ))}
+                <div className="relative">
+                  <div className="absolute left-4 top-4 text-slate-400">
+                    <IconSearch />
+                  </div>
+                  <input 
+                    type="text"
+                    placeholder="Cari Kota/Kabupaten..."
+                    className="w-full h-12 bg-slate-50 border-none rounded-2xl pl-12 pr-4 text-xs font-bold text-slate-600 outline-none focus:ring-2 focus:ring-pink-200 transition-all mb-3"
+                    value={citySearch}
+                    onChange={(e) => setCitySearch(e.target.value)}
+                  />
+                  <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar py-1">
+                    {['Semua', ...SITE_CONFIG.locations]
+                      .filter(c => c.toLowerCase().includes(citySearch.toLowerCase()))
+                      .map(c => (
+                      <button 
+                        key={c}
+                        onClick={() => setCity(c)}
+                        className={`px-6 py-2.5 rounded-xl text-[10px] font-black border transition-all ${city === c ? 'bg-slate-900 text-white border-slate-900 shadow-xl shadow-slate-200' : 'bg-white border-slate-100 text-slate-400'}`}
+                      >
+                        {c}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
