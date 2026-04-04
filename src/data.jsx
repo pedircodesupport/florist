@@ -10,6 +10,16 @@ export const IconMail = () => <svg width="20" height="20" viewBox="0 0 24 24" fi
 export const IconArrowLeft = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12,19 5,12 12,5"></polyline></svg>;
 export const IconHome = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>;
 
+// --- SEO & SITE CONFIG ---
+export const SITE_CONFIG = {
+    name: "Florist.AI",
+    title: "Florist.AI: Toko Bunga Online 24 Jam - Kirim Bunga Papan & Bouquet",
+    description: "Toko bunga online premium dengan pengiriman cepat ke seluruh Indonesia. Spesialis bunga papan, hand bouquet, dan standing flower untuk segala acara.",
+    keywords: "toko bunga online, kirim bunga jakarta, bunga papan ucapan, hand bouquet murah, florist indonesia, bunga mawar.",
+    url: "https://florist-ai.vercel.app", // Alamat demo
+    locations: ["Jakarta", "Bekasi", "Tangerang", "Depok", "Bogor", "Surabaya", "Bandung", "Medan", "Makassar"]
+};
+
 // --- MOCK DATA ---
 export const PRODUCTS = [
   { id: 1, sku: 'BP-001', name: 'Bunga Papan Wedding Klasik', price: 500000, disc: 5, city: 'Jakarta', cat: 'Papan', sold: 450, date: '2024-03-20', img: 'https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=600&h=600&fit=crop', desc: 'Rangkaian bunga papan pernikahan dengan desain klasik nan elegan.' },

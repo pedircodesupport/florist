@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
     IconSearch, IconFilter, IconWA, IconMail, IconStar, IconClose, IconArrowLeft, IconHome, 
-    PRODUCTS, GALLERY_IMAGES, TESTIMONIALS, sendWA 
+    PRODUCTS, GALLERY_IMAGES, TESTIMONIALS, sendWA, SITE_CONFIG 
 } from '../data';
 
 const Home = () => {
@@ -14,6 +14,46 @@ const Home = () => {
   const [category, setCategory] = useState('Semua');
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [visibleCount, setVisibleCount] = useState(4);
+
+  // SEO & Schema.org Logic
+  React.useEffect(() => {
+    document.title = SITE_CONFIG.title;
+    
+    // Inject JSON-LD
+    const schemaData = {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": SITE_CONFIG.name,
+      "description": SITE_CONFIG.description,
+      "url": SITE_CONFIG.url,
+      "telephone": "+628123456789",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Ruko Sinpasa Summarecon Bekasi",
+        "addressLocality": "Bekasi",
+        "addressRegion": "Jawa Barat",
+        "addressCountry": "ID"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "-6.2238",
+        "longitude": "106.9996"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.innerHTML = JSON.stringify(schemaData);
+    document.head.appendChild(script);
+
+    return () => document.head.removeChild(script);
+  }, []);
   const loaderRef = React.useRef(null);
 
   // Gallery Swipe State
@@ -98,7 +138,7 @@ const Home = () => {
                 <span className="text-[10px] font-bold text-slate-400 leading-tight">
                   Selamat datang 👋
                 </span>
-                <span className="font-black text-slate-800 text-sm tracking-tight uppercase">FLORIST.AI</span>
+                <h1 className="font-black text-slate-800 text-sm tracking-tight uppercase m-0">FLORIST.AI</h1>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -199,6 +239,12 @@ const Home = () => {
       </div>
 
       {/* Main Grid */}
+      <div className="px-4 mt-8 mb-4 flex justify-between items-end">
+          <h2 className="text-base font-black text-slate-900 flex items-center gap-2 tracking-tight uppercase">
+              <span className="w-1.5 h-4 bg-pink-500 rounded-full"></span>
+              PRODUK KAMI
+          </h2>
+      </div>
       <div className="px-4 grid grid-cols-2 gap-4 py-4">
         {visibleProducts.map((p, idx) => {
           const finalPrice = p.price - (p.price * p.disc / 100);
@@ -631,6 +677,28 @@ const Home = () => {
           <span className="text-[10px] font-black uppercase tracking-tighter">Whatsapp</span>
         </button>
       </div>
+
+      {/* SEO Footer (Localized Service Areas) */}
+      <footer className="mt-12 mb-24 px-6 py-8 border-t border-slate-100 bg-white opacity-80">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-6">
+            <h2 className="text-sm font-black text-slate-800 uppercase tracking-widest">
+              Area Pengiriman Kami
+            </h2>
+          </div>
+          <div className="flex flex-wrap gap-2">
+              {SITE_CONFIG.locations.map(loc => (
+                <span key={loc} className="text-[10px] font-bold text-slate-400 bg-slate-50 px-3 py-1 rounded-full text-nowrap">
+                  Toko Bunga {loc}
+                </span>
+              ))}
+          </div>
+          <p className="mt-6 text-[10px] text-slate-400 leading-relaxed font-medium">
+            {SITE_CONFIG.description} Kami melayani pengiriman bunga 24 jam dengan jaminan kesegaran dan ketepatan waktu. 
+            Cukup pesan via WhatsApp, bunga langsung sampai di lokasi Anda.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
